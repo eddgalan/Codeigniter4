@@ -1,0 +1,10 @@
+codeigniter-app:
+  container_name: codeigniter4
+  build: .
+  restart: always
+  ports:
+    - 8016:8080
+  volumes:
+    - ./:/var/www/html/
+  external_links:
+    - "mysql:mysql"
