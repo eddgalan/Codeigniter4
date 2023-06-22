@@ -5,3 +5,4 @@ apt-get update && apt -y install php7.4 php7.4-mysql php7.4-curl php7.4-xml php7
 curl -sS https://getcomposer.org/installer -o composer-setup.php
 php composer-setup.php --install-dir=/usr/local/bin --filename=composer && apt-get update
 chown -R www-data:1000 /var/www/html
+a2enmod rewrite # service apache2 restart
