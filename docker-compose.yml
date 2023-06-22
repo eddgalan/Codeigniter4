@@ -8,3 +8,4 @@ codeigniter-app:
     - ./:/var/www/html/
   external_links:
     - "mysql:mysql"
+  command: sh start.sh
