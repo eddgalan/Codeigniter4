@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\NewsModel;
+use CodeIgniter\Config\Factories;
 use CodeIgniter\Exceptions\PageNotFoundException;
 
 class News extends BaseController
@@ -62,7 +63,9 @@ class News extends BaseController
                 . view('templates/footer');
         }
 
-        $model = model(NewsModel::class);
+        //$model = model(NewsModel::class);
+
+        $model = Factories::models('NewsModel');
 
         $model->save([
             'title' => $post['title'],
