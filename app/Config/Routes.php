@@ -41,6 +41,7 @@ $routes->get('/', 'Home::index');
  *  News
  * --------------------------------------------------------------------
  */
+$routes->match(['get', 'post'], 'news/create', [News::class, 'create']);
 $routes->get('news/(:segment)', [News::class, 'view']);
 $routes->get('news', [News::class, 'index']);
 

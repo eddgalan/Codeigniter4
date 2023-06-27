@@ -137,5 +137,5 @@ fabric.properties
 .idea/**/azureSettings.xml
 .idea/*
 writable/logs/
-
+writable/
 # End of https://www.toptal.com/developers/gitignore/api/phpstorm,codeigniter
