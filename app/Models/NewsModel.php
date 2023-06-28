@@ -12,6 +12,15 @@ class NewsModel extends Model
     protected $useTimestamps = true;
     protected $validationRules = [];
     protected $useSoftDeletes = true;
+    protected $allowCallbacks = true;
+    protected $beforeInsert = ['generateSlug'];
+    protected $beforeUpdate   = ['generateSlug'];
+
+    public function generateSlug(Array $data)
+    {
+        $data['data']['slug'] = url_title($data['data']['title'], '-', true);
+        return $data;
+    }
 
     public function getNews($slug = false)
     {

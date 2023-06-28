@@ -69,7 +69,6 @@ class News extends BaseController
 
         $model->save([
             'title' => $post['title'],
-            'slug'  => url_title($post['title'], '-', true),
             'body'  => $post['body'],
         ]);
 
@@ -104,14 +103,19 @@ class News extends BaseController
                 . view('news/edit', $data)
                 . view('templates/footer');
         }
+        /*
         $newsModel->save(
             array(
                 'id' => $id,
                 'title' => $post['title'],
-                'slug' => url_title($post['title'], '-', true),
                 'body' => $post['body'],
             )
         );
+        */
+        $newsModel->update($id, [
+            'title' => $post['title'],
+            'body' => $post['body'],
+        ]);
         return view('templates/header', ['title' => 'Update a news item'])
             . view('news/success', array("operation" => 'updated'))
             . view('templates/footer');
