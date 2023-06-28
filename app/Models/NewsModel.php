@@ -8,6 +8,10 @@ class NewsModel extends Model
 {
     protected $table = 'news';
     protected $allowedFields = ['title', 'slug', 'body'];
+    protected $primaryKey = 'id';
+    protected $useTimestamps = true;
+    protected $validationRules = [];
+    protected $useSoftDeletes = true;
 
     public function getNews($slug = false)
     {

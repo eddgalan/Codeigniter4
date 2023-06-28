@@ -117,4 +117,13 @@ class News extends BaseController
             . view('templates/footer');
     }
 
+    public function delete($id)
+    {
+        $newsModel = model(NewsModel::class);
+        $newsModel->delete($id);
+        return view('templates/header', ['title' => 'Delete a new'])
+            . view('news/success', ["operation" => 'deleted'])
+            . view('templates/footer');
+    }
+
 }
