@@ -74,7 +74,46 @@ class News extends BaseController
         ]);
 
         return view('templates/header', ['title' => 'Create a news item'])
-            . view('news/success')
+            . view('news/success', array("operation" => 'created'))
+            . view('templates/footer');
+    }
+
+    public function edit($id)
+    {
+        helper('form');
+
+        $model = model(NewsModel::class);
+        $data['new'] = $model->find($id);
+
+        return view('templates/header', ['title' => 'Edit a news item'])
+            . view('news/edit', $data)
+            . view('templates/footer');
+    }
+
+    public function update($id)
+    {
+        $post = $this->request->getPost(['title', 'body']);
+        $newsModel = model(NewsModel::class);
+        // Checks whether the submitted data passed the validation rules.
+        if (! $this->validateData($post, [
+            'title' => 'required|max_length[255]|min_length[3]',
+            'body'  => 'required|max_length[5000]|min_length[10]',
+        ])) {
+            $data['new'] = $newsModel->find($id);
+            return view('templates/header', ['title' => 'Edit a news item'])
+                . view('news/edit', $data)
+                . view('templates/footer');
+        }
+        $newsModel->save(
+            array(
+                'id' => $id,
+                'title' => $post['title'],
+                'slug' => url_title($post['title'], '-', true),
+                'body' => $post['body'],
+            )
+        );
+        return view('templates/header', ['title' => 'Update a news item'])
+            . view('news/success', array("operation" => 'updated'))
             . view('templates/footer');
     }
 

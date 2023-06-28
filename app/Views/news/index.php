@@ -13,6 +13,7 @@
             <?= esc($news_item['body']) ?>
         </div>
         <p><a href="/news/<?= esc($news_item['slug'], 'url') ?>">View article</a></p>
+        <p><a href="/news/edit/<?= esc($news_item['id'], 'url') ?>">Edit article</a></p>
         <hr>
     <?php endforeach; ?>
 <?php else: ?>
