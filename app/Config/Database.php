@@ -29,7 +29,7 @@ class Database extends Config
         'hostname' => 'mysql',
         'username' => 'root',
         'password' => 'mysql',
-        'database' => 'test',
+        'database' => 'ci4tutorial',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
