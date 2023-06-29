@@ -4,10 +4,87 @@ namespace App\Controllers;
 
 use App\Models\NewsModel;
 use CodeIgniter\Config\Factories;
+use CodeIgniter\Database\RawSql;
 use CodeIgniter\Exceptions\PageNotFoundException;
 
 class News extends BaseController
 {
+    public function forge()
+    {
+        $forge = \Config\Database::forge();
+        /* ============== Create Database ============== */
+        if ($forge->createDatabase('citesting',true)) {
+            echo "<p>Database created</p>";
+        }
+
+        /* ============== Create Table and add fields ============== */
+        $fields = [
+            'id' => [
+                'type'           => 'INT',
+                'constraint'     => 5,
+                'unsigned'       => true,
+                'auto_increment' => true,
+            ],
+            'title' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '100',
+                'unique'     => true,
+            ],
+            'author' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 100,
+                'default'    => 'King of Town',
+            ],
+            'description' => [
+                'type' => 'TEXT',
+                'null' => true,
+            ],
+            'status' => [
+                'type'       => 'ENUM',
+                'constraint' => ['publish', 'pending', 'draft'],
+                'default'    => 'pending',
+            ],
+        ];
+
+        $forge->addField($fields);
+        $forge->addKey('id', true);
+
+        if ($forge->createTable('blogs', true)) {
+            echo "<p>Table created</p>";
+        }
+
+        /* ============== Add New Columns to the Table ============= */
+        $newFields = [
+            'created_at' => [
+                'type' => 'TIMESTAMP',
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+                'after' => 'status',
+            ],
+            'updated_at' => [
+                'type' => 'TIMESTAMP',
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+                'after' => 'created_at',
+            ],
+        ];
+        
+        if ($forge->addColumn('blogs', $newFields)) {
+            echo "<p>New Columns Added</p>";
+        }
+
+        /* =============== Modify a Field in a Table =============== */
+        $modifyFields = [
+            'description' => [
+                'type' => 'TEXT',
+                'null' => false,
+            ],
+        ];
+        if ($forge->modifyColumn('blogs', $modifyFields)) {
+            echo "<p>Column 'description' Updated</p>";
+        }
+
+
+
+    }
     public function index()
     {
         $model = model(NewsModel::class);

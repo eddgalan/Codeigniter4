@@ -47,6 +47,7 @@ $routes->get('news', [News::class, 'index']);
 $routes->get('news/edit/(:num)', [News::class, 'edit/$1']);
 $routes->post('news/update/(:num)', [News::class, 'update/$1']);
 $routes->get('news/delete/(:num)', [News::class, 'delete/$1']);
+$routes->get('database', [News::class, 'forge']);
 
 /*
  * --------------------------------------------------------------------
