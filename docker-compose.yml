@@ -3,7 +3,7 @@ codeigniter-app:
   build: .
   restart: always
   ports:
-    - 8016:8081
+    - 8016:8016
   volumes:
     - ./:/var/www/html/
   external_links:
