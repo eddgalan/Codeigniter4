@@ -2,8 +2,6 @@
 
 namespace Config;
 
-use App\Controllers\Pages;
-use App\Controllers\News;
 use App\Controllers\Login;
 
 // Create a new instance of our RouteCollection class.
@@ -39,16 +37,9 @@ $routes->get('/', 'Home::index');
 
 /**
  * --------------------------------------------------------------------
- *  News
+ *  Admin
  * --------------------------------------------------------------------
  */
-$routes->match(['get', 'post'], 'news/create', [News::class, 'create']);
-$routes->get('news/(:segment)', [News::class, 'view']);
-$routes->get('news', [News::class, 'index']);
-$routes->get('news/edit/(:num)', [News::class, 'edit/$1']);
-$routes->post('news/update/(:num)', [News::class, 'update/$1']);
-$routes->get('news/delete/(:num)', [News::class, 'delete/$1']);
-$routes->get('database', [News::class, 'forge']);
 $routes->match(['get', 'post'], 'admin/login', [Login::class, 'login']);
 $routes->get('admin/index', [Login::class, 'index']);
 $routes->get('admin/logout', [Login::class, 'logout']);
