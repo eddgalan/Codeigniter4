@@ -5,6 +5,7 @@ namespace Config;
 use App\Controllers\Pages;
 use App\Controllers\News;
 use App\Controllers\Login;
+use App\Controllers\Users;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
@@ -55,8 +56,17 @@ $routes->get('database', [News::class, 'forge']);
  * --------------------------------------------------------------------
  */
 $routes->match(['get', 'post'], 'admin/login', [Login::class, 'login']);
+$routes->get('admin', [Login::class, 'redirect']);
 $routes->get('admin/index', [Login::class, 'index']);
 $routes->get('admin/logout', [Login::class, 'logout']);
+
+/**
+ * --------------------------------------------------------------------
+ *  Users
+ * --------------------------------------------------------------------
+ */
+$routes->get('admin/users', [Users::class, 'index']);
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

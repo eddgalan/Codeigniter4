@@ -61,6 +61,7 @@ class UsersModel extends Model
             "id" => $userData['id'],
             "name" => $userData['name'],
             "lastname" => $userData['lastname'],
+            "username" => $userData['username'],
             "email" => $userData['email'],
         );
         session()->set(["userLogged" => $userData_]);

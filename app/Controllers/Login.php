@@ -57,6 +57,14 @@ class Login extends BaseController
     /**
      * @return \CodeIgniter\HTTP\RedirectResponse
      */
+    public function redirect()
+    {
+        return redirect()->to(base_url('admin/login'));
+    }
+
+    /**
+     * @return \CodeIgniter\HTTP\RedirectResponse
+     */
     public function logout()
     {
         session()->destroy();
